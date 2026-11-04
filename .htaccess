@@ -1,0 +1,9 @@
+# Local safety guard if the full project is placed under XAMPP htdocs.
+# Production: put only public/ inside the web document root.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?!public(?:/|$)).* - [F,L]
+</IfModule>
+<FilesMatch "^(\.env|composer\.(json|lock)|README.*|LICENSE|bootstrap\.php)$">
+    Require all denied
+</FilesMatch>

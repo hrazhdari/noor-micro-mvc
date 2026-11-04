@@ -1,0 +1,6 @@
+<h2>استقرار Noor برای استفاده عمومی</h2><p>از نظر ساختار، Noor طوری طراحی شده که بتوان آن را روی Apache و PHP 8.2+ قرار داد. با این حال نسخه فعلی بتا است و نصب واقعی باید با تست امنیت و دیتابیس همراه باشد.</p><h3>Document Root</h3><pre><code>/home/account/noor/
+   app/
+   config/
+   src/
+   storage/
+   public/  &lt;-- web document root</code></pre><p>ریشه سایت باید <code>public/</code> باشد. فایل‌های سورس و رمزهای اتصال نباید در دسترس URL عمومی باشند. فایل <code>.htaccess</code> ریشه پروژه جایگزین تنظیم درست Document Root نیست.</p><h3>چک‌لیست استقرار</h3><ol><li>PHP 8.2+ و افزونه‌های PDO/MySQL و mbstring مورد نیاز پروژه را بررسی کن.</li><li>Apache mod_rewrite و اجرای درخواست‌ها از public/index.php را آزمون کن.</li><li>تنظیمات <code>debug=false</code> و HTTPS را فعال کن.</li><li>مجوز نوشتن فقط برای مسیرهای runtime مانند <code>storage</code> بده.</li><li>صفحات 404، 405، 500 و CSRF را تست کن.</li><li>نشت فایل‌های <code>config</code>، <code>src</code> و <code>storage</code> را بررسی کن.</li><li>با دیتابیس آزمایشی Transaction و بازگردانی Backup را بررسی کن.</li></ol><div class="warn">تا وقتی تست‌های مربوط به محیط میزبان و ممیزی امنیت تکمیل نشده‌اند، پروژه را برای داده واقعی مشتری به‌عنوان Production-ready معرفی نکن.</div>

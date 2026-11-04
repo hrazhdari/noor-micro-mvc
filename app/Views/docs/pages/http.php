@@ -1,0 +1,7 @@
+<h2>Request و Response</h2><p>این دو کلاس، ورود و خروج HTTP را از جزئیات سرور جدا می‌کنند. به همین دلیل می‌توانیم در تست‌ها یک Request مصنوعی بسازیم و پاسخ را بدون راه‌اندازی Apache بررسی کنیم.</p><h3>خواندن ورودی</h3><pre><code>$router->post('/search', static function (\Noor\Http\Request $request): \Noor\Http\Response {
+    $term = $request->input('term', '');
+    return \Noor\Http\Response::json(['term' => $term]);
+});</code></pre><p>متدهای مهم: <code>query($key)</code> برای Query String، <code>input($key)</code> برای بدنه فرم یا JSON، <code>header($key)</code> برای هدر، <code>all()</code> برای داده‌های بدنه و <code>url($path)</code> برای ساخت آدرس متناسب با زیرپوشه.</p><h3>ساخت پاسخ</h3><pre><code>Response::html('&lt;h1&gt;Hello&lt;/h1&gt;');
+Response::text('ok', 200);
+Response::json(['status' => 'ok']);
+Response::redirect('/products', 303);</code></pre><p>پاسخ HTML باید خروجی قابل اعتماد و Escapeشده داشته باشد. <code>Response::html()</code> به‌تنهایی داده واردشده توسط کاربر را امن نمی‌کند.</p><h3>چرا Response را برمی‌گردانیم؟</h3><p>وقتی Handler یک شیء Response برمی‌گرداند، status و header و body مستقل از کد ارسال شبکه قابل تست‌اند. ارسال نهایی فقط در <code>public/index.php</code> انجام می‌شود.</p>

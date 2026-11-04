@@ -1,0 +1,21 @@
+/config/app.php
+/config/database.php
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/sessions/*
+!/storage/sessions/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+/.idea/
+/.vscode/
+.DS_Store
+
+# Local secrets and backups
+.env
+.env.*
+!.env.example
+*.sql
+*.sql.gz
+*.bak
+*.backup
+*.log
