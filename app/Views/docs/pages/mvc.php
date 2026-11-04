@@ -1,4 +1,4 @@
-<h2>ساخت Controller و View</h2><p>Controller درخواست را می‌گیرد، داده آماده می‌کند و خروجی مناسب را برمی‌گرداند. View فقط مسئول تولید HTML است؛ قواعد کاری مانند کنترل مانده انبار در View قرار نمی‌گیرند.</p><h3>Controller نمونه</h3><pre><code>&lt;?php
+<h2>ساخت Controller و View</h2><p>Controller درخواست را می‌گیرد، داده آماده می‌کند و خروجی مناسب را برمی‌گرداند. View فقط مسئول نمایش اطلاعات است؛ مثلاً محاسبه مبلغ نهایی سفارش یا بررسی دسترسی کاربر نباید داخل View انجام شود.</p><h3>Controller نمونه</h3><pre><code>&lt;?php
 namespace App\Controllers;
 
 use Noor\Core\Controller;
@@ -11,7 +11,7 @@ final class ProductController extends Controller
     {
         return $this->view('products/index', [
             'title' => 'فهرست کالاها',
-            'products' => [['name' => 'Pipe']]
+            'products' => [['name' => 'Example book']]
         ]);
     }
 }</code></pre><h3>View نمونه</h3><p>فایل <code>app/Views/products/index.php</code> را ایجاد کن:</p><pre><code>&lt;h1&gt;&lt;?= \Noor\Core\View::escape($title) ?&gt;&lt;/h1&gt;

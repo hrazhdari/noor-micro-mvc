@@ -25,4 +25,4 @@ Only known `slug` values can select templates. This prevents arbitrary paths fro
 
 ## Publishing requirements
 
-For a production website, configure the domain's Document Root to `public/`, serve HTTPS, consider a self-hosted local font if external Google Fonts are unavailable, and validate headers, access controls and target environment. Never claim this beta is production certified.
+For a production website, configure the domain's Document Root to `public/`, serve HTTPS, consider a self-hosted local font if external Google Fonts are unavailable, and validate headers, access controls and target environment. The stable API label does not imply production certification; confirm the application and hosting security before deployment.

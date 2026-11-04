@@ -7,17 +7,18 @@ use Noor\Database\Database;
 
 $settings = require dirname(__DIR__) . '/config/database.php';
 $db = Database::connect($settings);
-$stmt = $db->prepare('SELECT * FROM products WHERE ProductId = :id');
+
+// Example schema: articles(id, title) and activity_logs(message).
+$stmt = $db->prepare('SELECT id, title FROM articles WHERE id = :id');
 $stmt->execute(['id' => 25]);
-$product = $stmt->fetch();
+$article = $stmt->fetch();
 
 Database::transaction($db, function (PDO $pdo): void {
-    $stmt = $pdo->prepare('UPDATE stock SET qty = qty - :amount WHERE id = :id AND qty >= :amount');
-    $stmt->execute(['amount' => 2, 'id' => 10]);
-    if ($stmt->rowCount() !== 1) { throw new RuntimeException('Insufficient stock'); }
+    $stmt = $pdo->prepare('INSERT INTO activity_logs (message) VALUES (:message)');
+    $stmt->execute(['message' => 'Article viewed']);
 });
 ```
 
-The stock table is illustrative only. Proper inventory implementations require carefully designed schema, row-level locking, unique constraints, deadlock retries, and tests with concurrent transactions. `Database::transaction()` handles only one PDO connection and should not be nested using this wrapper.
+The `articles` and `activity_logs` tables are illustrative and are not created by Noor. Build your own schema and validate it before running these examples. For operations that update several rows, consider constraints, transaction isolation, locking, deadlock retries, and concurrent tests. `Database::transaction()` wraps a single PDO connection and must not be nested with this helper.
 
 **Testing:** the build container had PDO core but no PDO drivers. The connection and rollback could not be integration-tested there; run `php -m` and test with an isolated development MySQL database on your workstation.
